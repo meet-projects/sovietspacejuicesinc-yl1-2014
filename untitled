@@ -1,0 +1,23 @@
+import pygame
+import sys
+
+if __name__=="__main__": 
+    pygame.init()
+    main_screen = pygame.display.set_mode((400, 400))
+    main_screen.fill((255,255,255))
+    #button_rec = pygame.Rect(100, 100, 20, 20)
+    button_sq = pygame.Surface([100, 100])
+    button_sq.fill((255, 0, 0))
+    button_rec = button_sq.get_rect()
+    main_screen.blit(button_sq, button_rec)
+    
+    while True:
+
+        ev = pygame.event.poll()
+        if ev.type == pygame.QUIT: 
+            sys.exit()
+        if ev.type == pygame.MOUSEBUTTONDOWN:
+            x, y = ev.pos
+            if button_rec.collidepoint(x, y):
+                print "you clicked me!"
+        pygame.display.flip()
