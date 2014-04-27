@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 import events
+import Label
  
 class Game(events.Event):
     def __init__(self):
@@ -19,6 +20,8 @@ class Game(events.Event):
         self._running = True
         self._image_surf = pygame.image.load("myimage.jpg").convert()
         self._image_loc = pygame.Rect(70, 70, 50, 20)
+        self._testText = Label.Label(pygame.Rect(70, 70, 50, 20), "HI")
+        
  
     def on_event(self, event):
         if event.type == QUIT:
@@ -79,6 +82,7 @@ class Game(events.Event):
     def on_render(self):
         self._display_surf.fill(self._background)
         self._display_surf.blit(self._image_surf, self._image_loc, pygame.Rect(300, 200, 100, 70))
+        self._display_surf.blit(self._testText.getSurface(), (100,100))
         pygame.display.flip()
 
 
