@@ -20,7 +20,7 @@ class Game(events.Event):
         self._running = True
         self._image_surf = pygame.image.load("myimage.jpg").convert()
         self._image_loc = pygame.Rect(70, 70, 50, 20)
-        self._testText = Label.Label(pygame.Rect(70, 70, 50, 20), "HI")
+        self._testText = Label.Label("Heyyy")
         
  
     def on_event(self, event):
