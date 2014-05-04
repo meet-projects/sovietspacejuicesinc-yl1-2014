@@ -5,7 +5,7 @@ class itemCatergory:
     def __init__(self, name, id, items, location, width, height, icon, command):
         self.name = name
         self.id = id
-        self.itemList = items #List containing all item objects
+        self.items = items #List containing all item objects
         self.location = location
         self.width = width
         self.height = height

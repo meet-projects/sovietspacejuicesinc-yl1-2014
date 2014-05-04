@@ -22,13 +22,15 @@ class Game(events.Event):
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._display_surf.fill(self._background)
         self._running = True
+        self._screen = "Main" #Main - original screen. itemCat - screen showing items. checkOut - checkout screen.
+        self.buttons = []
         self._itemCategories = []
         def itemCategory1Command():
             print "itemCat1Command"
+            self._screen = "itemCatScreen:00"
         self._itemCategories.append(iC.itemCatergory("NASA", 01, [], (100,100), 100, 100, "Images/NASA.jpg", itemCategory1Command))
         
-        self._screen = "Main" #Main - original screen. itemCat - screen showing items. checkOut - checkout screen.
-        self.buttons = []
+        
         
         
         
@@ -96,6 +98,12 @@ class Game(events.Event):
             self.buttons = []
             for itemCat in self._itemCategories:
                 self.buttons.append(itemCat.getButton())
+                
+        if self._screen.find("itemCatScreen:") != -1:
+            itemCatNumber = int(self._screen.replace("itemCatScreen:", ""))
+            self.buttons = []
+            for item in self._itemCategories[itemCatNumber].items:
+                self.buttons.append(item.getButton())
             
     def on_render(self):
         self._display_surf.fill(self._background)
@@ -107,6 +115,10 @@ class Game(events.Event):
             for itemCat in self._itemCategories:
                 self._display_surf.blit(itemCat.getSurface(), itemCat.location)
         
+        elif self._screen.find("itemCatScreen:") != -1:
+            itemCatNumber = int(self._screen.replace("itemCatScreen:", ""))
+            for item in self._itemCategories[itemCatNumber].items:
+                self._display_surf.blit(item.getSurface(), item.location)
         
         #self._display_surf.blit(self._image_surf, self._image_loc, pygame.Rect(0, 0, 144, 144))
         #self._display_surf.blit(self._testText.getSurface(), (100,100))
