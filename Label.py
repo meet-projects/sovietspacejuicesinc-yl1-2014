@@ -10,10 +10,10 @@ class Label():
       
 
         for character in myfont.metrics(text):
-            self.width += (character[1]-character[0])
+            self.width += (character[4])
             
      
-        self.dimentions = (self.width + 3*self.widthOffSet), self.height # is *3 and not *2 to account for slight rounding errors in .metrics(text) -- just ignore
+        self.dimentions = (self.width + 2*self.widthOffSet), self.height # is *3 and not *2 to account for slight rounding errors in .metrics(text) -- just ignore
         self._text = text
         self._surface = pygame.Surface(self.dimentions)
         self._surface.blit(myfont.render(self._text, 1, (255,255,0)), (self.widthOffSet-1, 0))

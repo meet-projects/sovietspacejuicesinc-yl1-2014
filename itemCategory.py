@@ -1,5 +1,6 @@
 import pygame
 import Button
+import Items
 
 class itemCatergory:
     def __init__(self, name, id, items, location, width, height, icon, command):

@@ -5,6 +5,7 @@ import events
 import Label
 import Button
 import itemCategory as iC
+import Items
  
 class Game(events.Event):
     def __init__(self):
@@ -25,10 +26,19 @@ class Game(events.Event):
         self._screen = "Main" #Main - original screen. itemCat - screen showing items. checkOut - checkout screen.
         self.buttons = []
         self._itemCategories = []
-        def itemCategory1Command():
-            print "itemCat1Command"
+        def itemCategory0Command():
+            print "itemCat0Command"
             self._screen = "itemCatScreen:00"
-        self._itemCategories.append(iC.itemCatergory("NASA", 01, [], (100,100), 100, 100, "Images/NASA.jpg", itemCategory1Command))
+            
+        def itemCat0ItemNumber0Command():
+            print "itemCat0ItemNumber1Command"
+            self._itemCategories[0].items[0].incriment()
+            
+        itemCat0ItemNumber0 = Items.item("Apollo", 0000, 40000, 0, (100,100), 144, 144, "Images/APOLLO.jpg", itemCat0ItemNumber0Command)
+        
+        itemsToAdd = []
+        itemsToAdd.append(itemCat0ItemNumber0)
+        self._itemCategories.append(iC.itemCatergory("NASA", 00, itemsToAdd, (100,100), 144, 144, "Images/NASA.jpg", itemCategory0Command))
         
         
         
