@@ -1,7 +1,7 @@
 import pygame
 
 class Button:
-   def __init__(self, width, height, location, command):
+   def __init__(self, width, height, location, command, commandRight):
       self.is_hover = False
       self.default_color = (200,250,100)
       self.hover_color = (255,255,255)
@@ -11,6 +11,7 @@ class Button:
       self.location = location
       self.rect = pygame.Rect(location[0], location[1], width, height)
       self.command = command
+      self.commandRight = commandRight
       
    def color(self):
       if self.is_hover:
@@ -33,6 +34,10 @@ class Button:
    def onMouseClick(self, location):
         if self.rect.collidepoint(location):
             self.command()
+            
+   def onRightClick(self, location):
+       if self.rect.collidepoint(location):
+            self.commandRight()
             
    def getSurface(self):
      surface = pygame.Surface((self.width, self.height))

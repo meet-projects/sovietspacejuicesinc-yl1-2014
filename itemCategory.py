@@ -12,7 +12,7 @@ class itemCatergory:
         self.height = height
         self.icon = icon #String of image icon location
         self.surface = pygame.image.load(icon).convert()
-        self.button = Button.Button(width, height, location, command)
+        self.button = Button.Button(width, height, location, command, None)
         
         
     def getSurface(self):

@@ -13,7 +13,7 @@ class Game(events.Event):
         self._display_surf = None
         self._image_surf = None
         self._image_loc = None
-        self.size = self.width, self.height = 640, 400
+        self.size = self.width, self.height = 800, 500
         self._background = (96,96,96)
  
     
@@ -33,8 +33,12 @@ class Game(events.Event):
         def itemCat0ItemNumber0Command():
             print "itemCat0ItemNumber1Command"
             self._itemCategories[0].items[0].incriment()
+        
+        def itemCat0ItemNumber0CommandRight():
+            print "itemCat0ItemNumber1Command"
+            self._itemCategories[0].items[0].decrement()
             
-        itemCat0ItemNumber0 = Items.item("Apollo", 0000, 40000, 0, (100,100), 144, 144, "Images/APOLLO.jpg", itemCat0ItemNumber0Command)
+        itemCat0ItemNumber0 = Items.item("Apollo", 0000, 40000, 0, (100,100), 144, 144, "Images/APOLLO.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
         
         itemsToAdd = []
         itemsToAdd.append(itemCat0ItemNumber0)
@@ -150,6 +154,9 @@ class Game(events.Event):
         for button in self.buttons:
             button.onMouseClick(event.pos)
 
+    def on_rbutton_down(self, event):
+        for button in self.buttons:
+            button.onRightClick(event.pos)
 
     def on_cleanup(self):
         pygame.quit()

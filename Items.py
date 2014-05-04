@@ -3,7 +3,7 @@ import Button
 import Label
 
 class item:
-    def __init__(self, name, id, price, amount, location, width, height, icon, command):
+    def __init__(self, name, id, price, amount, location, width, height, icon, command, commandRight):
         self.name = name
         self.id = id
         self.price = price
@@ -13,7 +13,7 @@ class item:
         self.height = height
         self.icon = icon 
         self.surface = pygame.image.load(icon).convert()
-        self.button = Button.Button(width, height, location, command)
+        self.button = Button.Button(width, height, location, command, commandRight)
         self.totalPrice = price*amount
         self.labelName = Label.Label("Name: " + str(name))
         self.labelPrice = Label.Label("Price: " + str(price))
@@ -36,6 +36,10 @@ class item:
     
     def incriment(self):
         self.amount+=1
+        
+    def decrement(self):
+        if self.amount > 0:
+            self.amount-=1
     
     def updateTotalPrice(self):
         self.totalPrice = self.amount * self.price
