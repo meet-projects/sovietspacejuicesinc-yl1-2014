@@ -1,3 +1,5 @@
+import pygame
+
 class My_Button:
    def __init__(self, text):
       self.text = text
@@ -33,4 +35,6 @@ class My_Button:
          self.is_hover = True 
       else:
          self.is_hover = False
-   def_execute():
+         
+   def onClick(self):
+        

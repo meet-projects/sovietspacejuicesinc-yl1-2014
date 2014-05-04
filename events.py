@@ -1,6 +1,4 @@
-import pygame
-from pygame.locals import *
- 
+
 class Event:
     def __init__(self):
         pass

@@ -18,9 +18,15 @@ class Game(events.Event):
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._display_surf.fill(self._background)
         self._running = True
-        self._image_surf = pygame.image.load("myimage.jpg").convert()
-        self._image_loc = pygame.Rect(70, 70, 50, 20)
-        self._testText = Label.Label("Heyyy")
+        self._screen = "Main" #Main - original screen. itemCat - screen showing items. checkOut - checkout screen.
+        
+        self.itemCategories = []
+        self.item_categories[0] = 
+        
+        
+        #self._image_surf = pygame.image.load("Images/myimage.jpg").convert()
+        #self._image_loc = pygame.Rect(70, 70, 50, 20)
+        #self._testText = Label.Label("Heyyy")
         
  
     def on_event(self, event):
@@ -81,8 +87,13 @@ class Game(events.Event):
         pass
     def on_render(self):
         self._display_surf.fill(self._background)
-        self._display_surf.blit(self._image_surf, self._image_loc, pygame.Rect(300, 200, 100, 70))
-        self._display_surf.blit(self._testText.getSurface(), (100,100))
+        
+        if self._screen == "Main":
+            
+        
+        
+        #self._display_surf.blit(self._image_surf, self._image_loc, pygame.Rect(0, 0, 144, 144))
+        #self._display_surf.blit(self._testText.getSurface(), (100,100))
         pygame.display.flip()
 
 
@@ -91,9 +102,10 @@ class Game(events.Event):
          self._running = False
 
     def on_mouse_move(self, event):
-        print event.pos
-        if event.pos[0]>=0 and event.pos[0]<=self.width and event.pos[1]>=0 and event.pos[1]<=self.height:
-            self._image_loc = pygame.Rect(event.pos[0], event.pos[1], 100, 70)
+        pass
+        #print event.pos
+        #if event.pos[0]>=0 and event.pos[0]<=self.width and event.pos[1]>=0 and event.pos[1]<=self.height:
+            #self._image_loc = pygame.Rect(event.pos[0], event.pos[1], 100, 70)
 
 
     def on_cleanup(self):
