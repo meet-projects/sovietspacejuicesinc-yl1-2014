@@ -26,57 +26,78 @@ class Game(events.Event):
         self._screen = "Main" #Main - original screen. itemCat - screen showing items. checkOut - checkout screen.
         self.buttons = []
         self._itemCategories = []
-        def itemCategory0Command():
+        def itemCategory0Command(self):
             print "itemCat0Command"
             self._screen = "itemCatScreen:00"
+        def itemCategory1Command(self):
+            print "itemCat0Command"
+            self._screen = "itemCatScreen:01"
+        def itemCategory2Command(self):
+            print "itemCat0Command"
+            self._screen = "itemCatScreen:02"
+        def itemCategory3Command(self):
+            print "itemCat0Command"
+            self._screen = "itemCatScreen:03"
             
-        def itemCat0ItemNumber0Command():
+        def itemIncrementCommand(self):
             print "itemCat0ItemNumber1Command"
-            self._itemCategories[0].items[0].incriment()
+            self.incriment()
         
-        def itemCat0ItemNumber0CommandRight():
+        def itemDecrementCommand(self):
             print "itemCat0ItemNumber1Command"
-            self._itemCategories[0].items[0].decrement()
-            
-        itemCat0ItemNumber0 = Items.item("Apollo", 0000, 40000, 0, (100,100), 144, 144, "Images/APOLLO.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
+            self.decrement()
         
-        itemCat0ItemNumber1 = Items.item("Mercury", 0001, 40000, 0, (100,100), 144, 144, "Images/Mercury.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
-        
-        itemCat0ItemNumber2 = Items.item("x38", 0002, 40000, 0, (100,100), 144, 144, "Images/x38c.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
-        
-         itemCat0ItemNumber3 = Items.item("GEMINI", 0003, 40000, 0, (100,100), 144, 144, "Images/GEMINI.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
-       
-        itemCat1ItemNumber0 = Items.item("Sputnik", 0100, 40000, 0, (100,100), 144, 144, "Images/Sputnik.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
-       
-        itemCat1ItemNumber1 = Items.item("Vostok", 0101, 40000, 0, (100,100), 144, 144, "Images/Vostok.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
-       
-        itemCat1ItemNumber2 = Items.item("Voskhod", 0102, 40000, 0, (100,100), 144, 144, "Images/voskhod-1__1.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
-       
-        
-        itemCat3ItemNumber0 = Items.item("SPACEX - DRAGON 7", 0100, 40000, 0, (100,100), 144, 144, "Images/SPACEX - DRAGON 7.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)        itemsToAdd = []
-       
-        itemCat3ItemNumber1 = Items.item("DREAMCHASER 7", 0101, 40000, 0, (100,100), 144, 144, "Images/DREAMCHASER 7.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
-       
-        itemCat3itemNumber2 = Items.item("CST-100", 0102, 40000, 0, (100,100), 144, 144, "Images/CST-100.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
-       
-        itemCat4ItemNumber0 = Items.item("Lemonade", 0200, 40000, 0, (100,100), 144, 144, "Images/Lemonade.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
-       
-        itemCat4ItemNumber1 = Items.item("Orange", 0201, 40000, 0, (100,100), 144, 144, "Images/", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
-       
-        itemCat4ItemNumber2 = Items.item("Grapefruit", 0202, 40000, 0, (100,100), 144, 144, "Images/Grapefruit.jpg	", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
-       
-        itemCat4ItemNumber3 = Items.item("Peach Mango", 0203, 40000, 0, (100,100), 144, 144, "Images/Peach Mango.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
-       
-
-       
-       
+        itemsToAdd = []    
+        itemCat0ItemNumber0 = Items.item("Apollo", 0000, 40000, 0, (100,100), 144, 144, "Images/APOLLO.jpg", itemIncrementCommand, itemDecrementCommand)
+        itemCat0ItemNumber1 = Items.item("Mercury", 0001, 40000, 0, (100,300), 144, 144, "Images/Mercury.jpg", itemIncrementCommand, itemDecrementCommand)
+        itemCat0ItemNumber2 = Items.item("x38", 0002, 40000, 0, (300,100), 144, 144, "Images/x38c.jpg", itemIncrementCommand, itemDecrementCommand)
+        itemCat0ItemNumber3 = Items.item("GEMINI", 0003, 40000, 0, (300,300), 144, 144, "Images/GEMINI.jpg", itemIncrementCommand, itemDecrementCommand)
        
         itemsToAdd.append(itemCat0ItemNumber0)
-        self._itemCategories.append(iC.itemCatergory("NASA", 00, itemsToAdd, (100,100), 144, 144, "Images/NASA.jpg", itemCategory0Command))
-        self._itemCategories.append(iC.itemCatergory("Russian Spaceships", 01, itemsToAdd, (100,100), 144, 144, "Images/.jpg", itemCategory0Command))
-        self._itemCategories.append(iC.itemCatergory("Other Spaceships", 02, itemsToAdd, (100,100), 144, 144, "Images/.jpg", itemCategory0Command))        
-        self._itemCategories.append(iC.itemCatergory("TROPICANA FLORIDA SUNSHINE", 03, itemsToAdd, (100,100), 144, 144, "Images/.jpg", itemCategory0Command))
+        itemsToAdd.append(itemCat0ItemNumber1)
+        itemsToAdd.append(itemCat0ItemNumber2)
+        itemsToAdd.append(itemCat0ItemNumber3)
+        self._itemCategories.append(iC.itemCatergory("NASA", 00, itemsToAdd, (100,100), 144, 144, "Images/NASA.jpg", itemCategory0Command, self))
+        
+        itemsToAdd = []
+        itemCat1ItemNumber0 = Items.item("Sputnik", 0100, 40000, 0, (100,100), 144, 144, "Images/Sputnik.jpg", itemIncrementCommand, itemDecrementCommand)
+        itemCat1ItemNumber1 = Items.item("Vostok", 0101, 40000, 0, (100,300), 144, 144, "Images/Vostok.jpg", itemIncrementCommand, itemDecrementCommand)
+        itemCat1ItemNumber2 = Items.item("Voskhod", 0102, 40000, 0, (300,100), 144, 144, "Images/voskhod-1__1.jpg", itemIncrementCommand, itemDecrementCommand)
+       
+        itemsToAdd.append(itemCat1ItemNumber0)
+        itemsToAdd.append(itemCat1ItemNumber1)
+        itemsToAdd.append(itemCat1ItemNumber2)
+        self._itemCategories.append(iC.itemCatergory("Russian Spaceships", 01, itemsToAdd, (100,300), 144, 144, "Images/Sputnik.jpg", itemCategory1Command, self))
+        
+        itemsToAdd = []
+        itemCat2ItemNumber0 = Items.item("SPACEX - DRAGON 7", 0200, 40000, 0, (100,100), 144, 144, "Images/SPACEX - DRAGON 7.jpg", itemIncrementCommand, itemDecrementCommand)        
+        itemCat2ItemNumber1 = Items.item("DREAMCHASER 7", 0201, 40000, 0, (100,300), 144, 144, "Images/DREAMCHASER 7.jpg", itemIncrementCommand, itemDecrementCommand)       
+        itemCat2ItemNumber2 = Items.item("CST-100", 0202, 40000, 0, (300,100), 144, 144, "Images/CST-100.jpg", itemIncrementCommand, itemDecrementCommand)       
+       
+        itemsToAdd.append(itemCat2ItemNumber0)
+        itemsToAdd.append(itemCat2ItemNumber1)
+        itemsToAdd.append(itemCat2ItemNumber2)
+        self._itemCategories.append(iC.itemCatergory("Other Spaceships", 02, itemsToAdd, (300,100), 144, 144, "Images/CST-100.jpg", itemCategory2Command, self))        
+        
+        itemsToAdd = []
+        itemCat3ItemNumber0 = Items.item("Lemonade", 0300, 40000, 0, (100,100), 144, 144, "Images/Lemonade.jpg", itemIncrementCommand, itemDecrementCommand)       
+        itemCat3ItemNumber1 = Items.item("Orange", 0301, 40000, 0, (100,300), 144, 144, "Images/Orange.jpeg", itemIncrementCommand, itemDecrementCommand)       
+        itemCat3ItemNumber2 = Items.item("Grapefruit", 0302, 40000, 0, (300,100), 144, 144, "Images/Grapefruit.jpg", itemIncrementCommand, itemDecrementCommand)       
+        itemCat3ItemNumber3 = Items.item("Peach Mango", 0303, 40000, 0, (300,300), 144, 144, "Images/Peach Mango.jpg", itemIncrementCommand, itemDecrementCommand)       
+       
+        itemsToAdd.append(itemCat3ItemNumber0)
+        itemsToAdd.append(itemCat3ItemNumber1)
+        itemsToAdd.append(itemCat3ItemNumber2)
+        itemsToAdd.append(itemCat3ItemNumber3)
+        self._itemCategories.append(iC.itemCatergory("TROPICANA FLORIDA SUNSHINE", 03, itemsToAdd, (300,300), 144, 144, "Images/Orange.jpeg", itemCategory3Command, self))
       
+      
+        
+        def goBackCommand(self):
+            self._screen = "Main"
+        self.backButton = Button.Button(144, 50, (50,50), goBackCommand, None, self)
+        self.backButton.currentColor = self.backButton.default_color = self.backButton.hover_color = None #Make sure that the surface is not overwritten
+        self.backButton.surface = Label.Label("BACK").getSurface()
       
         #self._image_surf = pygame.image.load("Images/myimage.jpg").convert()
         #self._image_loc = pygame.Rect(70, 70, 50, 20)
@@ -148,6 +169,7 @@ class Game(events.Event):
             self.buttons = []
             for item in self._itemCategories[itemCatNumber].items:
                 self.buttons.append(item.getButton())
+            self.buttons.append(self.backButton)
             
     def on_render(self):
         self._display_surf.fill(self._background)

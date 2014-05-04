@@ -13,7 +13,7 @@ class item:
         self.height = height
         self.icon = icon 
         self.surface = pygame.image.load(icon).convert()
-        self.button = Button.Button(width, height, location, command, commandRight)
+        self.button = Button.Button(width, height, location, command, commandRight, self)
         self.totalPrice = price*amount
         self.labelName = Label.Label("Name: " + str(name))
         self.labelPrice = Label.Label("Price: " + str(price))
