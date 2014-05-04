@@ -40,11 +40,11 @@ class Game(events.Event):
             self._screen = "itemCatScreen:03"
             
         def itemIncrementCommand(self):
-            print "itemCat0ItemNumber1Command"
+            print "itemIncrementCommand"
             self.incriment()
         
         def itemDecrementCommand(self):
-            print "itemCat0ItemNumber1Command"
+            print "itemDecrementCommand"
             self.decrement()
         
         itemsToAdd = []    
@@ -98,6 +98,18 @@ class Game(events.Event):
         self.backButton = Button.Button(144, 50, (50,50), goBackCommand, None, self)
         self.backButton.currentColor = self.backButton.default_color = self.backButton.hover_color = None #Make sure that the surface is not overwritten
         self.backButton.surface = Label.Label("BACK").getSurface()
+        
+        
+        def goToCheckout(self):
+            self._screen = "checkOut"
+        self.checkoutButton = Button.Button(144, 50, (500,250), goToCheckout, None, self)
+        self.checkoutButton.currentColor = self.checkoutButton.default_color = self.checkoutButton.hover_color = None #Make sure that the surface is not overwritten
+        self.checkoutButton.surface = Label.Label("CHECK OUT").getSurface()
+        self.surfacesOfItemsShopped = [] #Used for listing items in checkout screen
+        
+        
+        self.title = Label.Label("Main Screen").getSurface()
+        self.titleLocation = (200, 50)
       
         #self._image_surf = pygame.image.load("Images/myimage.jpg").convert()
         #self._image_loc = pygame.Rect(70, 70, 50, 20)
@@ -160,19 +172,36 @@ class Game(events.Event):
                     self.on_minimize()
     def on_loop(self):
         if self._screen == "Main":
+            self.title = Label.Label("Main Screen").getSurface()
             self.buttons = []
             for itemCat in self._itemCategories:
                 self.buttons.append(itemCat.getButton())
+            self.buttons.append(self.checkoutButton)
                 
-        if self._screen.find("itemCatScreen:") != -1:
+        elif self._screen.find("itemCatScreen:") != -1:
+            self.title = Label.Label("Item Category Screen of: " + self._itemCategories[int(self._screen.replace("itemCatScreen:", ""))].name).getSurface()
             itemCatNumber = int(self._screen.replace("itemCatScreen:", ""))
             self.buttons = []
             for item in self._itemCategories[itemCatNumber].items:
                 self.buttons.append(item.getButton())
             self.buttons.append(self.backButton)
             
+        elif self._screen == "checkOut":
+            self.title = Label.Label("Check Out Screen").getSurface()
+            self.buttons = []
+            itemsShopped = []
+            for itemCat in self._itemCategories:
+                for item in itemCat.items:
+                    if item.amount > 0:
+                        itemsShopped.append(item)
+            
+            self.surfacesOfItemsShopped = []
+            for item in itemsShopped:
+                self.surfacesOfItemsShopped.append(Label.Label("Name: " + item.name + "Price: " + str(item.price) + " Amount: " + str(item.amount) + " TotPrice: " + str(item.getTotalPrice())))
+            
     def on_render(self):
         self._display_surf.fill(self._background)
+        self._display_surf.blit(self.title, self.titleLocation)
         for button in self.buttons:
             self._display_surf.blit(button.getSurface(), button.location)
             
@@ -186,6 +215,9 @@ class Game(events.Event):
             for item in self._itemCategories[itemCatNumber].items:
                 self._display_surf.blit(item.getSurface(), item.location)
         
+        elif self._screen == "checkOut":
+            for x in xrange(self.surfacesOfItemsShopped.__len__()):
+                self._display_surf.blit(self.surfacesOfItemsShopped[x].getSurface(), (100, 100 + x *40))
         #self._display_surf.blit(self._image_surf, self._image_loc, pygame.Rect(0, 0, 144, 144))
         #self._display_surf.blit(self._testText.getSurface(), (100,100))
         pygame.display.flip()

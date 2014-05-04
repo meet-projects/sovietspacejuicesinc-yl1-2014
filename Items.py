@@ -45,7 +45,7 @@ class item:
         self.totalPrice = self.amount * self.price
     
     def getTotalPrice(self):
-        self.updateTotalPrice(self)
+        self.updateTotalPrice()
         return self.totalPrice
     
     def getPrice(self):

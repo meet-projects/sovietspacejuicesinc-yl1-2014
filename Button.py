@@ -38,11 +38,13 @@ class Button:
         
    def onMouseClick(self, location):
         if self.rect.collidepoint(location):
-            self.command(self.objectThatRunsCommand)
+          if self.objectThatRunsCommand!=None and self.command != None:
+              self.command(self.objectThatRunsCommand)
             
    def onRightClick(self, location):
        if self.rect.collidepoint(location):
-            self.commandRight(self.objectThatRunsCommand)
+           if self.objectThatRunsCommand!=None and self.commandRight != None:
+               self.commandRight(self.objectThatRunsCommand)
             
    def getSurface(self):
        return self.surface
