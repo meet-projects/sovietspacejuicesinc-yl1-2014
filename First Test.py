@@ -27,6 +27,15 @@ class Game(events.Event):
       
       self.moneyin = 0
  
+    def addMoney():
+       global money
+       money += 10
+       budget.config(text='Budget: $'+str(money))
+       moneyButton = Button(root,text='+ $10',width=15,height=7,command=addMoney)
+    
+       money += 1000000
+       budget.config(text='Budget: $'+str(money))
+       moneyButton = Button(root,text='+ $1000000',width=20,height=10,command=addMoney)
     
             
     def on_init(self):
