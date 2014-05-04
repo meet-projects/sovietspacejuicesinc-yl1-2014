@@ -40,14 +40,44 @@ class Game(events.Event):
             
         itemCat0ItemNumber0 = Items.item("Apollo", 0000, 40000, 0, (100,100), 144, 144, "Images/APOLLO.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
         
-        itemsToAdd = []
+        itemCat0ItemNumber1 = Items.item("Mercury", 0001, 40000, 0, (100,100), 144, 144, "Images/Mercury.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
+        
+        itemCat0ItemNumber2 = Items.item("x38", 0002, 40000, 0, (100,100), 144, 144, "Images/x38c.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
+        
+         itemCat0ItemNumber3 = Items.item("GEMINI", 0003, 40000, 0, (100,100), 144, 144, "Images/GEMINI.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
+       
+        itemCat1ItemNumber0 = Items.item("Sputnik", 0100, 40000, 0, (100,100), 144, 144, "Images/Sputnik.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
+       
+        itemCat1ItemNumber1 = Items.item("Vostok", 0101, 40000, 0, (100,100), 144, 144, "Images/Vostok.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
+       
+        itemCat1ItemNumber2 = Items.item("Voskhod", 0102, 40000, 0, (100,100), 144, 144, "Images/voskhod-1__1.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)
+       
+        
+        itemCat3ItemNumber0 = Items.item("SPACEX - DRAGON 7", 0100, 40000, 0, (100,100), 144, 144, "Images/SPACEX - DRAGON 7.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)        itemsToAdd = []
+       
+        itemCat3ItemNumber1 = Items.item("DREAMCHASER 7", 0101, 40000, 0, (100,100), 144, 144, "Images/DREAMCHASER 7.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
+       
+        itemCat3itemNumber2 = Items.item("CST-100", 0102, 40000, 0, (100,100), 144, 144, "Images/CST-100.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
+       
+        itemCat4ItemNumber0 = Items.item("Lemonade", 0200, 40000, 0, (100,100), 144, 144, "Images/Lemonade.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
+       
+        itemCat4ItemNumber1 = Items.item("Orange", 0201, 40000, 0, (100,100), 144, 144, "Images/", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
+       
+        itemCat4ItemNumber2 = Items.item("Grapefruit", 0202, 40000, 0, (100,100), 144, 144, "Images/Grapefruit.jpg	", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
+       
+        itemCat4ItemNumber3 = Items.item("Peach Mango", 0203, 40000, 0, (100,100), 144, 144, "Images/Peach Mango.jpg", itemCat0ItemNumber0Command, itemCat0ItemNumber0CommandRight)       
+       
+
+       
+       
+       
         itemsToAdd.append(itemCat0ItemNumber0)
         self._itemCategories.append(iC.itemCatergory("NASA", 00, itemsToAdd, (100,100), 144, 144, "Images/NASA.jpg", itemCategory0Command))
-        
-        
-        
-        
-        
+        self._itemCategories.append(iC.itemCatergory("Russian Spaceships", 01, itemsToAdd, (100,100), 144, 144, "Images/.jpg", itemCategory0Command))
+        self._itemCategories.append(iC.itemCatergory("Other Spaceships", 02, itemsToAdd, (100,100), 144, 144, "Images/.jpg", itemCategory0Command))        
+        self._itemCategories.append(iC.itemCatergory("TROPICANA FLORIDA SUNSHINE", 03, itemsToAdd, (100,100), 144, 144, "Images/.jpg", itemCategory0Command))
+      
+      
         #self._image_surf = pygame.image.load("Images/myimage.jpg").convert()
         #self._image_loc = pygame.Rect(70, 70, 50, 20)
         #self._testText = Label.Label("Heyyy")
