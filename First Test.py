@@ -72,7 +72,7 @@ class Game(events.Event):
         itemsToAdd.append(itemCat1ItemNumber0)
         itemsToAdd.append(itemCat1ItemNumber1)
         itemsToAdd.append(itemCat1ItemNumber2)
-        self._itemCategories.append(iC.itemCatergory("Russian Spaceships", 01, itemsToAdd, (100,300), 144, 144, "Images/Sputnik.jpg", itemCategory1Command, self))
+        self._itemCategories.append(iC.itemCatergory("Russian Spaceships", 01, itemsToAdd, (300,100), 144, 144, "Images/Sputnik.jpg", itemCategory1Command, self))
         
         itemsToAdd = []
         itemCat2ItemNumber0 = Items.item("SPACEX - DRAGON 7", 0200, 40000, 0, (100,100), 144, 144, "Images/SPACEX - DRAGON 7.jpg", itemIncrementCommand, itemDecrementCommand)        
@@ -82,7 +82,7 @@ class Game(events.Event):
         itemsToAdd.append(itemCat2ItemNumber0)
         itemsToAdd.append(itemCat2ItemNumber1)
         itemsToAdd.append(itemCat2ItemNumber2)
-        self._itemCategories.append(iC.itemCatergory("Other Spaceships", 02, itemsToAdd, (300,100), 144, 144, "Images/CST-100.jpg", itemCategory2Command, self))        
+        self._itemCategories.append(iC.itemCatergory("Other Spaceships", 02, itemsToAdd,(100,300) , 144, 144, "Images/CST-100.jpg", itemCategory2Command, self))        
         
         itemsToAdd = []
         itemCat3ItemNumber0 = Items.item("Lemonade", 0300, 40000, 0, (100,100), 144, 144, "Images/Lemonade.jpg", itemIncrementCommand, itemDecrementCommand)       
