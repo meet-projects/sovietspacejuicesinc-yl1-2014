@@ -15,27 +15,12 @@ class Game(events.Event):
         self._image_loc = None
         self.size = self.width, self.height = 800, 500
         self._background = (96,96,96)
-        self.finishButton = Button.Button(width,length, size, height, (x coord, y coord),none, self)
+        
      
-    def finishButtonClicked:
-     If MoneyPutinside > totalMoneyNeeded:
-      self.screen= "Main"
-     for itemCat in self._itemCategories:
-      item.amount = 0
-     for item in self._itemCategories:
-      item.amount = 0
-      
-      self.moneyin = 0
- 
-    def addMoney():
-       global money
-       money += 10
-       budget.config(text='Budget: $'+str(money))
-       moneyButton = Button(root,text='+ $10',width=15,height=7,command=addMoney)
     
-       money += 1000000
-       budget.config(text='Budget: $'+str(money))
-       moneyButton = Button(root,text='+ $1000000',width=20,height=10,command=addMoney)
+    
+        
+    
     
             
     def on_init(self):
@@ -60,11 +45,11 @@ class Game(events.Event):
             self._screen = "itemCatScreen:03"
             
         def itemIncrementCommand(self):
-            print "itemCat0ItemNumber1Command"
+            print "itemIncerementCommand"
             self.incriment()
         
         def itemDecrementCommand(self):
-            print "itemCat0ItemNumber1Command"
+            print "itemDecrementCommand"
             self.decrement()
         
         itemsToAdd = []    
@@ -119,10 +104,48 @@ class Game(events.Event):
         self.backButton.currentColor = self.backButton.default_color = self.backButton.hover_color = None #Make sure that the surface is not overwritten
         self.backButton.surface = Label.Label("BACK").getSurface()
       
+      
+        def goToCheckout(self):
+            self._screen = "checkOut"
+        self.checkoutButton = Button.Button(144, 50, (500,275), goToCheckout, None, self)
+        self.checkoutButton.currentColor = self.checkoutButton.default_color = self.checkoutButton.hover_color = None #Make sure that the surface is not overwritten
+        self.checkoutButton.surface = Label.Label("CHECK OUT").getSurface()
+        self.surfacesOfItemsShopped = [] #Used for listing items in checkout screen
+        self.title = Label.Label("Main Screen").getSurface()
+        self.titleLocation = (200, 50)
         #self._image_surf = pygame.image.load("Images/myimage.jpg").convert()
         #self._image_loc = pygame.Rect(70, 70, 50, 20)
         #self._testText = Label.Label("Heyyy")
         
+        self.moneyPutInside = 0
+        
+        def finishButtonClicked(self):
+            totalMoneyNeeded = 0
+            for itemCat in self._itemCategories:
+                for item in itemCat.items:
+                    totalMoneyNeeded+=item.amount*item.price
+            
+            if self.moneyPutInside >= totalMoneyNeeded:
+                self._screen= "Main"
+                for itemCat in self._itemCategories:
+                    for item in itemCat.items:
+                        item.amount = 0
+                self.moneyPutInside = self.moneyPutInside - totalMoneyNeeded
+        self.finishButton = Button.Button(100,50, (600, 250), finishButtonClicked, None, self)
+        self.finishButton.currentColor = self.finishButton.default_color = self.finishButton.hover_color = None
+        self.finishButton.surface = Label.Label("FINISH").getSurface()
+        
+        def addMoney10(self):
+            self.moneyPutInside+=10
+        self.addMoney10Button = Button.Button(60,50, (575, 200), addMoney10, None, self)
+        self.addMoney10Button.currentColor = self.addMoney10Button.default_color = self.addMoney10Button.hover_color = None
+        self.addMoney10Button.surface = Label.Label("+$10").getSurface()
+        
+        def addMoney10M(self):
+            self.moneyPutInside+=10000000
+        self.addMoney10MButton = Button.Button(100,50, (650, 200), addMoney10M, None, self)
+        self.addMoney10MButton.currentColor = self.addMoney10MButton.default_color = self.addMoney10MButton.hover_color = None
+        self.addMoney10MButton.surface = Label.Label("+$10M").getSurface()
  
     def on_event(self, event):
         if event.type == QUIT:
@@ -180,20 +203,42 @@ class Game(events.Event):
                     self.on_minimize()
     def on_loop(self):
         if self._screen == "Main":
+            self.title = Label.Label("Main Screen").getSurface()
             self.buttons = []
             for itemCat in self._itemCategories:
                 self.buttons.append(itemCat.getButton())
-                
-                
-        if self._screen.find("itemCatScreen:") != -1:
+            self.buttons.append(self.checkoutButton)
+        
+        elif self._screen.find("itemCatScreen:") != -1:
+            self.title = Label.Label("Item Category Screen of: " + self._itemCategories[int(self._screen.replace("itemCatScreen:", ""))].name).getSurface()
             itemCatNumber = int(self._screen.replace("itemCatScreen:", ""))
             self.buttons = []
             for item in self._itemCategories[itemCatNumber].items:
                 self.buttons.append(item.getButton())
             self.buttons.append(self.backButton)
             
+        elif self._screen == "checkOut":
+            self.title = Label.Label("Check Out Screen").getSurface()
+            self.buttons = []
+
+            self.buttons.append(self.finishButton)
+            self.buttons.append(self.addMoney10Button)
+            self.buttons.append(self.addMoney10MButton)
+            self.buttons.append(self.backButton)
+            itemsShopped = []
+            for itemCat in self._itemCategories:
+                for item in itemCat.items:
+                    if item.amount > 0:
+                        itemsShopped.append(item)
+            
+            self.surfacesOfItemsShopped = []
+            for item in itemsShopped:
+                self.surfacesOfItemsShopped.append(Label.Label("Name: " + item.name + "Price: " + str(item.price) + " Amount: " + str(item.amount) + " TotPrice: " + str(item.getTotalPrice())))
+            
+            
     def on_render(self):
         self._display_surf.fill(self._background)
+        self._display_surf.blit(self.title, self.titleLocation)
         for button in self.buttons:
             self._display_surf.blit(button.getSurface(), button.location)
             
@@ -201,12 +246,31 @@ class Game(events.Event):
         if self._screen == "Main":
             for itemCat in self._itemCategories:
                 self._display_surf.blit(itemCat.getSurface(), itemCat.location)
+            self._display_surf.blit(Label.Label("Money Inside Machine: " + str (self.moneyPutInside)).getSurface(), (500, 175))
+            self._display_surf.blit(Label.Label("NOTE: Left over change is carri").getSurface(), (500, 200))
+            self._display_surf.blit(Label.Label("ed on, to future transactions!").getSurface(), (500, 225))
         
         elif self._screen.find("itemCatScreen:") != -1:
             itemCatNumber = int(self._screen.replace("itemCatScreen:", ""))
             for item in self._itemCategories[itemCatNumber].items:
                 self._display_surf.blit(item.getSurface(), item.location)
-        
+                
+        elif self._screen == "checkOut":
+            for x in xrange(self.surfacesOfItemsShopped.__len__()):
+                self._display_surf.blit(self.surfacesOfItemsShopped[x].getSurface(), (100, 100 + x *40))
+            
+            totalMoneyNeeded = 0
+            for itemCat in self._itemCategories:
+                for item in itemCat.items:
+                    totalMoneyNeeded+=item.amount*item.price
+            self._display_surf.blit(Label.Label("Total Money Due: " + str(totalMoneyNeeded)).getSurface(), (575, 100))
+            self._display_surf.blit(Label.Label("Total Money Put In: " + str(self.moneyPutInside)).getSurface(), (575, 125))
+            def getMaxInt(a, b):
+                if a > b:
+                    return a
+                else:
+                    return b
+            self._display_surf.blit(Label.Label("Change Due: " + str(getMaxInt(self.moneyPutInside - totalMoneyNeeded, 0))).getSurface(), (575, 150))
         #self._display_surf.blit(self._image_surf, self._image_loc, pygame.Rect(0, 0, 144, 144))
         #self._display_surf.blit(self._testText.getSurface(), (100,100))
         pygame.display.flip()
