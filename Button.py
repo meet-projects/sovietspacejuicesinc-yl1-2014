@@ -3,7 +3,7 @@ import pygame
 class Button:
    def __init__(self, width, height, location, command, commandRight, objectThatRunsCommand):
       self.is_hover = False
-      self.default_color = (200,250,100)
+      self.default_color = (200,250,10)
       self.hover_color = (255,255,255)
       self.currentColor = self.default_color
       self.width = width
