@@ -57,7 +57,7 @@ class item:
     
 '''
 class itemToBuy:
-        
+        #just another way of doing the code
  	def __init__(self, list):
         	self.list = []
 
