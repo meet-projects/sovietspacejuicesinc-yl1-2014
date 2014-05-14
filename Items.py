@@ -80,7 +80,7 @@ class itemToBuy:
         #removes the item from the cart's item list
 
 def main():
-    item1 = Item("Apollo", 369M)
+    item1 = Item("Apollo", 3M)
     item2 = Item("Tropicana Juice", 2.39)
     item3 = Item("Russian spaceship", 598M)
     c = Cart()
